@@ -265,6 +265,30 @@ function afficherTickets() {
     }
 }
 
+function annulerTicket() {
+    let ticketId = parseInt(prompt("ID du ticket à annuler : "));
+
+    let index = tickets.findIndex(function(ticket) {
+        return ticket.id === ticketId;
+    });
+
+   if (index === -1) {
+    console.log("Aucun ticket trouvé.");
+    return;
+}
+
+    let ticket = tickets[index];
+    let trip = trips.find(function(trip) {
+    return trip.id === ticket.tripId;
+    });
+
+    trip.availableSeats++;
+    tickets.splice(index, 1);
+    console.log("Ticket annulé avec succès.");
+
+    
+}
+
 
 
 // MENU PRINCIPAL //
@@ -303,7 +327,7 @@ while (choix !== "0") {
             break;
 
         case "4":
-            console.log("Annuler un ticket");
+            annulerTicket();
             break;
 
         case "5":
