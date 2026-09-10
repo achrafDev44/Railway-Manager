@@ -183,16 +183,16 @@ const trips = [
 ];
 
 const tickets = [
-    { id: 1, passengerName: "ACHRAF", tripId: 4, seatNumber: 1, price: 65 },
-    { id: 2, passengerName: "YOUNNES", tripId: 4, seatNumber: 2, price: 65 },
-    { id: 3, passengerName: "ZOUHAIR", tripId: 4, seatNumber: 3, price: 65 },
-    { id: 4, passengerName: "ABDLWAHAD", tripId: 4, seatNumber: 4, price: 65 },
-    { id: 5, passengerName: "HAMZA", tripId: 4, seatNumber: 5, price: 65 },
-    { id: 6, passengerName: "MOHAMMED", tripId: 7, seatNumber: 1, price: 150 },
-    { id: 7, passengerName: "WALID", tripId: 7, seatNumber: 2, price: 150 },
-    { id: 8, passengerName: "AMINE", tripId: 7, seatNumber: 3, price: 150 },
-    { id: 9, passengerName: "DIYAA", tripId: 7, seatNumber: 4, price: 150 },
-    { id: 10, passengerName: "ADAM", tripId: 7, seatNumber: 5, price: 150 }
+    { id: 1, passengerName: "ACHRAF", tripId: 1, seatNumber: 1, price: 25 },
+    { id: 2, passengerName: "YOUNNES", tripId: 2, seatNumber: 1, price: 90 },
+    { id: 3, passengerName: "ZOUHAIR", tripId: 3, seatNumber: 1, price: 140 },
+    { id: 4, passengerName: "ABDLWAHAD", tripId: 4, seatNumber: 1, price: 65 },
+    { id: 5, passengerName: "HAMZA", tripId: 5, seatNumber: 1, price: 110 },
+    { id: 6, passengerName: "MOHAMMED", tripId: 6, seatNumber: 1, price: 120 },
+    { id: 7, passengerName: "WALID", tripId: 7, seatNumber: 1, price: 150 },
+    { id: 8, passengerName: "AMINE", tripId: 8, seatNumber: 1, price: 40 },
+    { id: 9, passengerName: "DIYAA", tripId: 9, seatNumber: 1, price: 55 },
+    { id: 10, passengerName: "ADAM", tripId: 10, seatNumber: 1, price: 30 }
 ];
 
 //  FONCTION : AFFICHER LES TRAJETS//
@@ -286,7 +286,7 @@ function afficherTickets() {
 }
 
 function rechercherTickets(){
-    let nom = prompt("Nom de passager : ");
+    let nom = prompt("Nom de passager : ").trim();
 
     let resultats = tickets.filter(function(ticket){
         return ticket.passengerName.toLowerCase() === nom.toLowerCase();
@@ -432,10 +432,22 @@ function annulerTicket() {
 
     trip.availableSeats++;
     tickets.splice(index, 1);
-    console.log("Ticket annulé avec succès.");
-
-    
+    console.log("Ticket annulé avec succès.");   
 }
+
+function verifierPlaces() {
+
+    for (let i = 0; i < trips.length; i++) {
+         let nombreTickets = 0;
+         for (let j = 0; j < tickets.length; j++) {
+            if (tickets[j].tripId === trips[i].id) {
+                nombreTickets++;
+            }
+        }
+         trips[i].availableSeats = 50 - nombreTickets;
+    }
+}
+verifierPlaces();
 
 
 
