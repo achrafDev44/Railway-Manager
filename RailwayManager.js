@@ -285,6 +285,27 @@ function rechercherTickets(){
     }
 }
 
+function filtrerTrajets(){
+    let depart = prompt("Ville de départ : ");
+
+    let  resultats = trips.filter(function(trip){
+        return trip.departure.toLocaleLowerCase() === depart.toLocaleLowerCase();
+    });
+
+    if(resultats.length === 0){
+        console.log("Aucun trajet trouvé.");
+        return;
+    }
+
+    for(let i =0; i < resultats.length; i++){
+        console.log(
+           "Trajet :", resultats[i].departure,
+           "vers", resultats[i].destination,
+           "| Prix :",resultats[i].price + "  DH"
+        );
+    }
+}
+
 function annulerTicket() {
     let ticketId = parseInt(prompt("ID du ticket à annuler : "));
 
@@ -355,7 +376,7 @@ while (choix !== "0") {
             break;
 
         case "6":
-            console.log("Filtrer les trajets");
+            filtrerTrajets();
             break;
 
         case "7":
