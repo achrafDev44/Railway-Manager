@@ -306,6 +306,34 @@ function filtrerTrajets(){
     }
 }
 
+function trierTrajets(){
+
+    for (let j = 0; j < trips.length - 1; j++) {
+
+        for(let i = 0; i <trips.length -1; i++){
+
+            if (trips[i].price > trips[i + 1].price) {
+
+                let temp = trips[i];
+                trips[i] = trips[i + 1];
+                trips[i + 1] = temp;
+            }
+
+        }  
+    }
+    console.log("\n========== TRAJETS TRIÉS PAR PRIX ==========");
+
+    for (let i = 0; i < trips.length; i++) {
+        console.log(
+            trips[i].departure,
+            "vers",
+            trips[i].destination,
+            "| Prix :",
+            trips[i].price + " DH"
+);
+}
+}
+
 function annulerTicket() {
     let ticketId = parseInt(prompt("ID du ticket à annuler : "));
 
@@ -380,7 +408,7 @@ while (choix !== "0") {
             break;
 
         case "7":
-            console.log("Trier les trajets");
+          trierTrajets();
             break;
 
         case "0":
