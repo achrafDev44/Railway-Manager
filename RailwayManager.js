@@ -243,7 +243,7 @@ function acheterTicket() {
     tickets.push(ticket);
     nextTicketId++;
     trip.availableSeats--;
-    console.log("Ticket créé :", ticket);
+    
 }
 
 function afficherTickets() {
@@ -269,7 +269,7 @@ function rechercherTickets(){
     let nom = prompt("Nom de passager : ");
 
     let resultats = tickets.filter(function(ticket){
-        return ticket.passengerName.toLowerCase() === nom.toLowerCase(); ;
+        return ticket.passengerName.toLowerCase() === nom.toLowerCase();
     });
     if (resultats.length === 0){
         console.log("Aucun ticket trouvé.")   
@@ -289,7 +289,7 @@ function filtrerTrajets(){
     let depart = prompt("Ville de départ : ");
 
     let  resultats = trips.filter(function(trip){
-        return trip.departure.toLocaleLowerCase() === depart.toLocaleLowerCase();
+        return trip.departure.toLowerCase() === depart.toLowerCase();
     });
 
     if(resultats.length === 0){
