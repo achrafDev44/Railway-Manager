@@ -334,6 +334,65 @@ function trierTrajets(){
 }
 }
 
+function statistiques() {
+
+    console.log("\n========== STATISTIQUES ==========");
+
+    console.log("Nombre total de tickets :", tickets.length);
+
+    let chiffreAffaires = 0;
+
+    for (let i = 0; i < tickets.length; i++) {
+
+    chiffreAffaires = chiffreAffaires + tickets[i].price;
+    }
+
+    console.log("Chiffre d'affaires total :", chiffreAffaires + " DH");
+
+    let ventesParTrajet = {};
+
+    for (let i = 0; i < tickets.length; i++) {
+
+    let tripId = tickets[i].tripId;
+
+    if (ventesParTrajet[tripId] === undefined) {
+        ventesParTrajet[tripId] = 1;
+    } else {
+        ventesParTrajet[tripId]++;
+    }
+}
+
+    let trajetLePlusVendu = null;
+
+    if (tickets.length === 0) {
+        console.log("Aucun ticket vendu.");
+        return;
+}    
+    let nombreVentesMax = 0;
+
+    for (let tripId in ventesParTrajet) {
+
+        if (ventesParTrajet[tripId] > nombreVentesMax) {
+            nombreVentesMax = ventesParTrajet[tripId];
+            trajetLePlusVendu = tripId;
+    }
+}
+
+    let trip = trips.find(function(trip) {
+    return trip.id == trajetLePlusVendu;
+});
+
+console.log("\nTrajet le plus vendu :");
+console.log(
+    trip.departure,
+    "→",
+    trip.destination
+);
+console.log(nombreVentesMax, "tickets vendus");
+
+
+}
+
 function annulerTicket() {
     let ticketId = parseInt(prompt("ID du ticket à annuler : "));
 
@@ -377,6 +436,7 @@ while (choix !== "0") {
     console.log("5. Rechercher un ticket");
     console.log("6. Filtrer les trajets");
     console.log("7. Trier les trajets");
+    console.log("8. Statistiques");
     console.log("0. Quitter");
 
     choix = prompt("Votre choix : ");
@@ -408,7 +468,11 @@ while (choix !== "0") {
             break;
 
         case "7":
-          trierTrajets();
+            trierTrajets();
+            break;
+        
+        case "8":
+            statistiques();   
             break;
 
         case "0":
