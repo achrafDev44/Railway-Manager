@@ -265,6 +265,26 @@ function afficherTickets() {
     }
 }
 
+function rechercherTickets(){
+    let nom = prompt("Nom de passager : ");
+
+    let resultats = tickets.filter(function(ticket){
+        return ticket.passengerName.toLowerCase() === nom.toLowerCase(); ;
+    });
+    if (resultats.length === 0){
+        console.log("Aucun ticket trouvé.")   
+    }
+    for (let i = 0; i < resultats.length; i++) {
+        console.log(
+            "ID :", resultats[i].id,
+            "| Passager :", resultats[i].passengerName,
+            "| Trajet :", resultats[i].tripId,
+            "| Siège :", resultats[i].seatNumber,
+            "| Prix :", resultats[i].price + " DH"
+        );
+    }
+}
+
 function annulerTicket() {
     let ticketId = parseInt(prompt("ID du ticket à annuler : "));
 
@@ -331,7 +351,7 @@ while (choix !== "0") {
             break;
 
         case "5":
-            console.log("Rechercher un ticket");
+            rechercherTickets();
             break;
 
         case "6":
