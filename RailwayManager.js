@@ -183,20 +183,19 @@ const trips = [
 ];
 
 const tickets = [
-    { id: 1, passengerName: "ACHRAF", tripId: 1, seatNumber: 1, price: 25 },
-    { id: 2, passengerName: "YOUNNES", tripId: 2, seatNumber: 1, price: 90 },
-    { id: 3, passengerName: "ZOUHAIR", tripId: 3, seatNumber: 1, price: 140 },
+    { id: 1, passengerName: "ABID", tripId: 1, seatNumber: 1, price: 25 },
+    { id: 2, passengerName: "ACHRAF", tripId: 2, seatNumber: 1, price: 90 },
+    { id: 3, passengerName: "MOHAMED", tripId: 3, seatNumber: 1, price: 140 },
     { id: 4, passengerName: "ABDLWAHAD", tripId: 4, seatNumber: 1, price: 65 },
-    { id: 5, passengerName: "HAMZA", tripId: 5, seatNumber: 1, price: 110 },
+    { id: 5, passengerName: "YOUNNES", tripId: 5, seatNumber: 1, price: 110 },
     { id: 6, passengerName: "MOHAMMED", tripId: 6, seatNumber: 1, price: 120 },
     { id: 7, passengerName: "WALID", tripId: 7, seatNumber: 1, price: 150 },
     { id: 8, passengerName: "AMINE", tripId: 8, seatNumber: 1, price: 40 },
     { id: 9, passengerName: "DIYAA", tripId: 9, seatNumber: 1, price: 55 },
-    { id: 10, passengerName: "ADAM", tripId: 10, seatNumber: 1, price: 30 }
+    { id: 10, passengerName: "ZOUHAIR", tripId: 10, seatNumber: 1, price: 30 }
 ];
 
 //  FONCTION : AFFICHER LES TRAJETS//
-
 
 function afficherTrajets() {
 
@@ -309,7 +308,7 @@ function filtrerTrajets(){
     let depart = prompt("Ville de départ : ");
 
     let  resultats = trips.filter(function(trip){
-        return trip.departure.toLowerCase() === depart.toLowerCase();
+        return trip.departure.toLowerCase().trim()=== depart.toLowerCase().trim();
     });
 
     if(resultats.length === 0){
@@ -355,62 +354,19 @@ function trierTrajets(){
 }
 
 function statistiques() {
-
     console.log("\n========== STATISTIQUES ==========");
 
+    // Nombre total de tickets vendus
     console.log("Nombre total de tickets :", tickets.length);
 
+    // Calcul du chiffre d'affaires total
     let chiffreAffaires = 0;
 
     for (let i = 0; i < tickets.length; i++) {
-
-    chiffreAffaires = chiffreAffaires + tickets[i].price;
+        chiffreAffaires = chiffreAffaires + tickets[i].price;
     }
 
     console.log("Chiffre d'affaires total :", chiffreAffaires + " DH");
-
-    let ventesParTrajet = {};
-
-    for (let i = 0; i < tickets.length; i++) {
-
-    let tripId = tickets[i].tripId;
-
-    if (ventesParTrajet[tripId] === undefined) {
-        ventesParTrajet[tripId] = 1;
-    } else {
-        ventesParTrajet[tripId]++;
-    }
-}
-
-    let trajetLePlusVendu = null;
-
-    if (tickets.length === 0) {
-        console.log("Aucun ticket vendu.");
-        return;
-}    
-    let nombreVentesMax = 0;
-
-    for (let tripId in ventesParTrajet) {
-
-        if (ventesParTrajet[tripId] > nombreVentesMax) {
-            nombreVentesMax = ventesParTrajet[tripId];
-            trajetLePlusVendu = tripId;
-    }
-}
-
-    let trip = trips.find(function(trip) {
-    return trip.id == trajetLePlusVendu;
-});
-
-console.log("\nTrajet le plus vendu :");
-console.log(
-    trip.departure,
-    "→",
-    trip.destination
-);
-console.log(nombreVentesMax, "tickets vendus");
-
-
 }
 
 function annulerTicket() {
